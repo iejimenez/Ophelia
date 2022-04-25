@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Business Rules", "Application Business Rules", "{38745D2C-15BA-402C-91BB-6C9A956C3442}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enterprise Business Rules", "Enterprise Business Rules", "{746ACA87-2E11-471F-A442-75584DAA1851}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks And Drivers", "Frameworks And Drivers", "{214BE522-CDE6-4E32-A38C-FAFD7E083851}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface Adapters", "Interface Adapters", "{44F016B0-8E4B-413C-B905-F14638D9EDA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{CA36A89B-F2EF-4B94-A181-96835559DA3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ophelia.Entities", "Ophelia.Entities\Ophelia.Entities.csproj", "{F14E03A4-417E-471D-8FF1-BED75153F857}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ophelia.Repositories.EFCore", "Ophelia.Repositories.EFCore\Ophelia.Repositories.EFCore.csproj", "{7C9C927E-0898-4AB7-869B-11ABE3C912B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ophelia.UseCasesDTOs", "Ophelia.UseCasesDTOs\Ophelia.UseCasesDTOs.csproj", "{FC8EF7C1-C434-4AB4-BC08-E81452144297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ophelia.UseCases", "Ophelia.UseCases\Ophelia.UseCases.csproj", "{09C3E216-0791-47DB-AB9D-189D13B39D5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ophelia.IoC", "Ophelia.IoC\Ophelia.IoC.csproj", "{7A754517-090E-4DA0-A8EA-79BCBDE8931F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presenters", "Presenters", "{6B59E25C-7458-46E1-85B2-BA54E13EA258}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ophelia.WebExceptionsPresenter", "Ophelia.WebExceptionsPresenter\Ophelia.WebExceptionsPresenter.csproj", "{5C079B72-983B-456F-8234-839D5B732278}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ophelia.WebApi", "Ophelia.WebApi\Ophelia.WebApi.csproj", "{9EBA8D66-96EB-4884-80AF-9ADAE681E763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ophelia.Presenters", "Ophelia.Presenters\Ophelia.Presenters.csproj", "{AA971EFF-4CEB-4E43-A7DE-68D12E7102A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F14E03A4-417E-471D-8FF1-BED75153F857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14E03A4-417E-471D-8FF1-BED75153F857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14E03A4-417E-471D-8FF1-BED75153F857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14E03A4-417E-471D-8FF1-BED75153F857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C9C927E-0898-4AB7-869B-11ABE3C912B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C9C927E-0898-4AB7-869B-11ABE3C912B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C9C927E-0898-4AB7-869B-11ABE3C912B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C9C927E-0898-4AB7-869B-11ABE3C912B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC8EF7C1-C434-4AB4-BC08-E81452144297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC8EF7C1-C434-4AB4-BC08-E81452144297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC8EF7C1-C434-4AB4-BC08-E81452144297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC8EF7C1-C434-4AB4-BC08-E81452144297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09C3E216-0791-47DB-AB9D-189D13B39D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09C3E216-0791-47DB-AB9D-189D13B39D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09C3E216-0791-47DB-AB9D-189D13B39D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09C3E216-0791-47DB-AB9D-189D13B39D5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A754517-090E-4DA0-A8EA-79BCBDE8931F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A754517-090E-4DA0-A8EA-79BCBDE8931F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A754517-090E-4DA0-A8EA-79BCBDE8931F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A754517-090E-4DA0-A8EA-79BCBDE8931F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C079B72-983B-456F-8234-839D5B732278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C079B72-983B-456F-8234-839D5B732278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C079B72-983B-456F-8234-839D5B732278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C079B72-983B-456F-8234-839D5B732278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EBA8D66-96EB-4884-80AF-9ADAE681E763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EBA8D66-96EB-4884-80AF-9ADAE681E763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EBA8D66-96EB-4884-80AF-9ADAE681E763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EBA8D66-96EB-4884-80AF-9ADAE681E763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA971EFF-4CEB-4E43-A7DE-68D12E7102A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA971EFF-4CEB-4E43-A7DE-68D12E7102A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA971EFF-4CEB-4E43-A7DE-68D12E7102A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA971EFF-4CEB-4E43-A7DE-68D12E7102A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA36A89B-F2EF-4B94-A181-96835559DA3E} = {44F016B0-8E4B-413C-B905-F14638D9EDA4}
+		{F14E03A4-417E-471D-8FF1-BED75153F857} = {746ACA87-2E11-471F-A442-75584DAA1851}
+		{7C9C927E-0898-4AB7-869B-11ABE3C912B0} = {CA36A89B-F2EF-4B94-A181-96835559DA3E}
+		{FC8EF7C1-C434-4AB4-BC08-E81452144297} = {38745D2C-15BA-402C-91BB-6C9A956C3442}
+		{09C3E216-0791-47DB-AB9D-189D13B39D5C} = {38745D2C-15BA-402C-91BB-6C9A956C3442}
+		{7A754517-090E-4DA0-A8EA-79BCBDE8931F} = {44F016B0-8E4B-413C-B905-F14638D9EDA4}
+		{6B59E25C-7458-46E1-85B2-BA54E13EA258} = {44F016B0-8E4B-413C-B905-F14638D9EDA4}
+		{5C079B72-983B-456F-8234-839D5B732278} = {6B59E25C-7458-46E1-85B2-BA54E13EA258}
+		{9EBA8D66-96EB-4884-80AF-9ADAE681E763} = {CA36A89B-F2EF-4B94-A181-96835559DA3E}
+		{AA971EFF-4CEB-4E43-A7DE-68D12E7102A8} = {6B59E25C-7458-46E1-85B2-BA54E13EA258}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF5052AB-931F-4F2C-8B4A-AA07149F3E17}
+	EndGlobalSection
+EndGlobal
