@@ -5,13 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ophelia.Entities\Ophelia.Entities.csproj" />
+    <ProjectReference Include="..\Ophelia.Presenters\Ophelia.Presenters.csproj" />
     <ProjectReference Include="..\Ophelia.UseCasesDTOs\Ophelia.UseCasesDTOs.csproj" />
-    <ProjectReference Include="..\Ophelia.UseCasesPorts\Ophelia.UseCasesPorts.csproj" />
   </ItemGroup>
 
 </Project>

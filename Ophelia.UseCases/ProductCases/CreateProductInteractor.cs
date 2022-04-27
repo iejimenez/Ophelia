@@ -1,7 +1,11 @@
-﻿using MediatR;
+﻿
+using FluentValidation;
 using Ophelia.Entities.Exceptions;
 using Ophelia.Entities.Interfaces;
 using Ophelia.Entities.POCOEntities;
+using Ophelia.UseCases.Common.Validators;
+using Ophelia.UseCasesDTOs.CreateProduct;
+using Ophelia.UseCasesPorts.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +15,33 @@ using System.Threading.Tasks;
 
 namespace Ophelia.UseCases.ProductCases
 {
-    public class CreateProductInteractor : AsyncRequestHandler<CreateProductInputPort>
+    public class CreateProductInteractor : ICreateProductInputPort
     { 
         
         readonly IProductRepository ProductRepository;
         readonly IUnitOfWork UnitOfWork;
+        readonly ICreateProductOutputPort OutputPort;
+        readonly IEnumerable<IValidator<CreateProductParams>> Validators;
 
         public CreateProductInteractor(IProductRepository productRepository,  
-            IUnitOfWork unitOfWork) => 
-            (ProductRepository, UnitOfWork) = 
-            (productRepository,  unitOfWork);
+            IUnitOfWork unitOfWork, ICreateProductOutputPort outputPort,
+            IEnumerable<IValidator<CreateProductParams>> validators) => 
+            (ProductRepository, UnitOfWork, OutputPort, Validators) = 
+            (productRepository,  unitOfWork, outputPort, validators);
 
-        protected  async override Task Handle(CreateProductInputPort request, CancellationToken cancellationToken)
+        public async Task Handle(CreateProductParams product)
         {
-            Product product = new Product()
+            await Validator<CreateProductParams>.Validate(product, Validators);
+
+            Product productDB = new Product()
             {
-                Name = request.RequestData.Name,
-                Stock = request.RequestData.Stock,
-                UnitPrice = request.RequestData.UnitPrice
+                Name = product.Name,
+                Stock = product.Stock,
+                UnitPrice = product.UnitPrice
             };
 
-            ProductRepository.Create(product);
-           
+            ProductRepository.Create(productDB);
+
             try
             {
                 await UnitOfWork.SaveChangesAsync();
@@ -42,8 +51,9 @@ namespace Ophelia.UseCases.ProductCases
                 throw new GeneralException("Error al crear el producto.", ex.Message);
             }
 
-            request.OutputPort.Handle(product.Id);
+            await OutputPort.Handle(productDB.Id);
         }
+
 
     }
 }

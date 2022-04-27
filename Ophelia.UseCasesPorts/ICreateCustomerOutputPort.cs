@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ophelia.Presenters
+namespace Ophelia.UseCasesPorts
 {
-    public interface IPresenter<FormatDataType> 
+    public interface ICreateCustomerOutputPort
     {
-        public FormatDataType Content { get; }
+        public Task Handle(string id);
     }
 }

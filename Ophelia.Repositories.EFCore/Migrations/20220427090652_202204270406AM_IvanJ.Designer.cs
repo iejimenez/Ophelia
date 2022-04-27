@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ophelia.Repositories.EFCore.DataContext;
 
 namespace Ophelia.Repositories.EFCore.Migrations
 {
     [DbContext(typeof(OpheliaContext))]
-    partial class OpheliaContextModelSnapshot : ModelSnapshot
+    [Migration("20220427090652_202204270406AM_IvanJ")]
+    partial class _202204270406AM_IvanJ
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

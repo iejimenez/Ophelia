@@ -27,8 +27,7 @@ namespace Ophelia.Repositories.EFCore.Repositories
 
         public IEnumerable<Product> GetProductsBySpecification(Specification<Product> specification)
         {
-            Func<Product, bool> ExpressionDelegate = specification.Expression.Compile();
-            return Context.Products.Where(ExpressionDelegate);
+            return Context.Products.Where(p=>specification.ISSatisfiedBy(p));
         }
 
         public void Update(Product product)

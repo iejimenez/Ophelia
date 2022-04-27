@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ophelia.Presenters\Ophelia.Presenters.csproj" />
     <ProjectReference Include="..\Ophelia.Repositories.EFCore\Ophelia.Repositories.EFCore.csproj" />
     <ProjectReference Include="..\Ophelia.UseCases\Ophelia.UseCases.csproj" />
   </ItemGroup>

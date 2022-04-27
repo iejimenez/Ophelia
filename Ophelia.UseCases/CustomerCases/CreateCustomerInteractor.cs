@@ -1,8 +1,12 @@
-﻿using MediatR;
+﻿
+using FluentValidation;
 using Ophelia.Entities.Exceptions;
 using Ophelia.Entities.Interfaces;
 using Ophelia.Entities.POCOEntities;
 using Ophelia.Entities.Specifications;
+using Ophelia.UseCases.Common.Validators;
+using Ophelia.UseCasesDTOs.Product.CreateCustomer;
+using Ophelia.UseCasesPorts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,31 +16,37 @@ using System.Threading.Tasks;
 
 namespace Ophelia.UseCases.CustomerCases
 {
-    public class CreateCustomerInteractor : AsyncRequestHandler<CreateCustomerInputPort>
+    public class CreateCustomerInteractor : ICreateCustomerInputPort
     {
 
         readonly ICustomerRepository CustomerRepository;
         readonly IUnitOfWork UnitOfWork;
+        readonly ICreateCustomerOutputPort OutputPort;
+        readonly IEnumerable<IValidator<CreateCustomerParams>> Validators;
 
         public CreateCustomerInteractor(ICustomerRepository customerRepository,
-            IUnitOfWork unitOfWork) =>
-            (CustomerRepository, UnitOfWork) =
-            (customerRepository, unitOfWork);
+            IUnitOfWork unitOfWork, ICreateCustomerOutputPort outputPort,
+            IEnumerable<IValidator<CreateCustomerParams>> validators) =>
+            (CustomerRepository, UnitOfWork, OutputPort, Validators) =
+            (customerRepository, unitOfWork, outputPort, validators);
 
-        protected async override Task Handle(CreateCustomerInputPort request, CancellationToken cancellationToken)
+        public async Task Handle(CreateCustomerParams customer)
         {
-            Customer customer = new Customer()
+
+            await Validator<CreateCustomerParams>.Validate(customer, Validators);
+
+            Customer customerdb = new Customer()
             {
-                Id = request.RequestData.Id,
-                Name = request.RequestData.Name,
-                BirthDate = request.RequestData.BirthDate
+                Id = customer.Id,
+                Name = customer.Name,
+                BirthDate = customer.BirthDate
             };
 
-            IEnumerable<Customer> customers =  CustomerRepository.GetCustomersBySpecification(new CustomerByIdSpecification(customer.Id));
-            if(customers.Any())
+            IEnumerable<Customer> customers = CustomerRepository.GetCustomersBySpecification(new CustomerByIdSpecification(customer.Id));
+            if (customers.Any())
                 throw new GeneralException("Error al crear el cliente.", "Ya existe un cliente con esa identificación.");
 
-            CustomerRepository.Create(customer);
+            CustomerRepository.Create(customerdb);
 
             try
             {
@@ -47,7 +57,7 @@ namespace Ophelia.UseCases.CustomerCases
                 throw new GeneralException("Error al crear el cliente.", ex.Message);
             }
 
-            request.OutputPort.Handle(true);
+            await OutputPort.Handle(customer.Id);
         }
 
     }

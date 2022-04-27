@@ -1,8 +1,11 @@
-﻿using MediatR;
+﻿
+using FluentValidation;
 using Ophelia.Entities.Exceptions;
 using Ophelia.Entities.Interfaces;
 using Ophelia.Entities.POCOEntities;
 using Ophelia.Entities.Specifications;
+using Ophelia.UseCasesDTOs.Product.UpdateProduct;
+using Ophelia.UseCasesPorts.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,31 +15,33 @@ using System.Threading.Tasks;
 
 namespace Ophelia.UseCases.ProductCases
 {
-    class UpdateProductInteractor : AsyncRequestHandler<UpdateProductInputPort>
+    class UpdateProductInteractor : IUpdateProductInputPort
     {
         readonly IProductRepository ProductRepository;
         readonly IUnitOfWork UnitOfWork;
+        readonly IUpdateProductOutputPort OutputPort;
+        readonly IEnumerable<IValidator<UpdateProductParams>> Validators;
 
         public UpdateProductInteractor(IProductRepository productRepository,
-            IUnitOfWork unitOfWork) =>
-            (ProductRepository, UnitOfWork) =
-            (productRepository, unitOfWork);
+            IUnitOfWork unitOfWork, IEnumerable<IValidator<UpdateProductParams>> validators) =>
+            (ProductRepository, UnitOfWork, Validators) =
+            (productRepository, unitOfWork,validators);
 
-        protected async override Task Handle(UpdateProductInputPort request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateProductParams product)
         {
-            Product product = new Product()
+            Product productDB = new Product()
             {
-                Id = request.RequestData.Id,
-                Name = request.RequestData.Name,
-                Stock = request.RequestData.Stock,
-                UnitPrice = request.RequestData.UnitPrice
+                Id = product.Id,
+                Name = product.Name,
+                Stock = product.Stock,
+                UnitPrice = product.UnitPrice
             };
 
-            IEnumerable<Product> products = ProductRepository.GetProductsBySpecification(new ProductsAllSpecification(product.Id));
+            IEnumerable<Product> products = ProductRepository.GetProductsBySpecification(new ProductsByIdSpecification(product.Id));
             if (!products.Any())
                 throw new GeneralException("Error al actualizar el producto.", "No se encontro el producto referenciado.");
 
-            ProductRepository.Update(product);
+            ProductRepository.Update(productDB);
 
             try
             {
@@ -47,8 +52,9 @@ namespace Ophelia.UseCases.ProductCases
                 throw new GeneralException("Error al crear el producto.", ex.Message);
             }
 
-            request.OutputPort.Handle(true);
+            await OutputPort.Handle(true);
         }
+
 
     }
 }

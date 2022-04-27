@@ -20,8 +20,7 @@ namespace Ophelia.Repositories.EFCore.Repositories
 
         public IEnumerable<OrderDetail> GetOrderDetailsBySpecification(Specification<OrderDetail> specification)
         {
-            Func<OrderDetail, bool> ExpressionDelegate = specification.Expression.Compile();
-            return Context.OrderDetails.Where(ExpressionDelegate);
+            return Context.OrderDetails.Where(od=>specification.ISSatisfiedBy(od));
         }
     }
 }

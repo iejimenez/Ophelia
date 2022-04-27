@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ophelia.UseCases.CustomerCases
+namespace Ophelia.UseCasesPorts.Products
 {
-    public class CreateCustomerValidator
+    public interface ICreateProductOutputPort
     {
-
+        Task Handle(int productId);
     }
 }

@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿
 using Ophelia.Entities.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,32 +8,42 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ophelia.Entities.POCOEntities;
 using Ophelia.Entities.Exceptions;
+using Ophelia.UseCasesPorts;
+using Ophelia.UseCasesDTOs.Order.CreateOrder;
+using FluentValidation;
+using Ophelia.UseCases.Common.Validators;
 
 namespace Ophelia.UseCases.OrderCases
 {
-    public class CreateOrderInteractor :  AsyncRequestHandler<CreateOrderInputPort> 
+    public class CreateOrderInteractor : ICreateOrderInputPort
     {
         readonly IOrderRepository OrderRepository;
         readonly IOrderDetailRepository OrderDetailRepository;
         readonly IUnitOfWork UnitOfWork;
+        readonly ICreateOrderOutputPort OutputPort;
+        readonly IEnumerable<IValidator<CreateOrderParams>> Validators;
 
         public CreateOrderInteractor(IOrderRepository orderRepository, 
-            IOrderDetailRepository orderDetailRepository, 
-            IUnitOfWork unitOfWork) => 
-            (OrderRepository, OrderDetailRepository, UnitOfWork) = 
-            (orderRepository, orderDetailRepository, unitOfWork);
+            IOrderDetailRepository orderDetailRepository, IUnitOfWork unitOfWork,
+            IEnumerable<IValidator<CreateOrderParams>> validators) => 
+            (OrderRepository, OrderDetailRepository, UnitOfWork, Validators) = 
+            (orderRepository, orderDetailRepository, unitOfWork, validators);
 
-        protected async override Task Handle(CreateOrderInputPort request, CancellationToken cancellationToken)
+
+        public async Task Handle(CreateOrderParams order)
         {
-            Order order = new Order()
+
+            await Validator<CreateOrderParams>.Validate(order, Validators);
+
+            Order orderDB = new Order()
             {
-                CustomerId = request.RequestData.CustomerId,
+                CustomerId = order.CustomerId,
                 OrderDate = DateTime.Now,
-                ShipAddress = request.RequestData.ShipAddress
+                ShipAddress = order.ShipAddress
             };
 
-            OrderRepository.Create(order);
-            foreach(var orderDetail in request.RequestData.OrderDetails)
+            OrderRepository.Create(orderDB);
+            foreach (var orderDetail in order.OrderDetails)
             {
                 OrderDetailRepository.Create(new OrderDetail()
                 {
@@ -52,7 +62,7 @@ namespace Ophelia.UseCases.OrderCases
                 throw new GeneralException("Error al crear la orden.", ex.Message);
             }
 
-            request.OutputPort.Handle(order.Id);
+            await OutputPort.Handle(orderDB.Id);
         }
     }
 }

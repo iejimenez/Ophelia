@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Ophelia.Entities.Specifications
 {
-    public class ProductsAllSpecification : Specification<Product>
+    public class ProductsByIdSpecification : Specification<Product>
     {
         readonly int Id;
-        public ProductsAllSpecification(int id) {
+        public ProductsByIdSpecification(int id) {
             Id = id;
         }
-        public override Expression<Func<Product, bool>> Expression => p => (p.Id == Id);
+        public override Expression<Func<Product, bool>> Expression => (p) => (p.Id == Id);
     }
 }

@@ -28,8 +28,8 @@ namespace Ophelia.Repositories.EFCore.Repositories
 
         public IEnumerable<Customer> GetCustomersBySpecification(Specification<Customer> specification)
         {
-            Func<Customer, bool> ExpressionDelegate = specification.Expression.Compile();
-            return Context.Customers.Where(ExpressionDelegate);
+           
+            return Context.Customers.Where(specification.Expression);
         }
 
         public void Update(Customer customer)

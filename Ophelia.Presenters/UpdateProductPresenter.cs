@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Ophelia.Presenters
 {
-    public class CreateProductPresenter : ICreateProductOutputPort, IPresenter<int>
+    public class UpdateProductPresenter : IUpdateProductOutputPort, IPresenter<bool>
     {
-        public int Content { get; private set; }
-       
-        Task ICreateProductOutputPort.Handle(int productId)
+        public bool Content { get; private set; }
+        
+
+        Task IUpdateProductOutputPort.Handle(bool updated)
         {
-            Content = productId;
+            Content = updated;
             return Task.CompletedTask;
         }
     }
