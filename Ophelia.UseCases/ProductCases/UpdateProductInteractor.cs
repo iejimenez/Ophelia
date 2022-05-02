@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Ophelia.UseCases.ProductCases
 {
-    class UpdateProductInteractor : IUpdateProductInputPort
+    public class UpdateProductInteractor : IUpdateProductInputPort
     {
         readonly IProductRepository ProductRepository;
         readonly IUnitOfWork UnitOfWork;
@@ -23,24 +23,22 @@ namespace Ophelia.UseCases.ProductCases
         readonly IEnumerable<IValidator<UpdateProductParams>> Validators;
 
         public UpdateProductInteractor(IProductRepository productRepository,
-            IUnitOfWork unitOfWork, IEnumerable<IValidator<UpdateProductParams>> validators) =>
-            (ProductRepository, UnitOfWork, Validators) =
-            (productRepository, unitOfWork,validators);
+            IUnitOfWork unitOfWork, IUpdateProductOutputPort updateProductOuputPort, IEnumerable<IValidator<UpdateProductParams>> validators) =>
+            (ProductRepository, UnitOfWork, OutputPort, Validators) =
+            (productRepository, unitOfWork, updateProductOuputPort, validators);
 
         public async Task Handle(UpdateProductParams product)
         {
-            Product productDB = new Product()
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Stock = product.Stock,
-                UnitPrice = product.UnitPrice
-            };
-
+          
             IEnumerable<Product> products = ProductRepository.GetProductsBySpecification(new ProductsByIdSpecification(product.Id));
             if (!products.Any())
                 throw new GeneralException("Error al actualizar el producto.", "No se encontro el producto referenciado.");
 
+            Product productDB = products.FirstOrDefault();
+            productDB.Name = product.Name;
+            productDB.Stock = product.Stock;
+            productDB.UnitPrice = product.UnitPrice;
+            
             ProductRepository.Update(productDB);
 
             try
@@ -54,7 +52,5 @@ namespace Ophelia.UseCases.ProductCases
 
             await OutputPort.Handle(true);
         }
-
-
     }
 }

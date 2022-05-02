@@ -6,7 +6,7 @@ using Ophelia.Entities.POCOEntities;
 using Ophelia.Entities.Specifications;
 using Ophelia.UseCases.Common.Validators;
 using Ophelia.UseCasesDTOs.Product.CreateCustomer;
-using Ophelia.UseCasesPorts;
+using Ophelia.UseCasesPorts.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

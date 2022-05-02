@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ophelia.UseCasesPorts
+namespace Ophelia.UseCasesPorts.Customer
 {
-    public interface ICreateCustomerOutputPort
+    public interface IUpdateCustomerOutputPort
     {
-        public Task Handle(string id);
+        public Task Handle(bool updated);
     }
 }

@@ -27,7 +27,7 @@ namespace Ophelia.Repositories.EFCore.Repositories
 
         public IEnumerable<Product> GetProductsBySpecification(Specification<Product> specification)
         {
-            return Context.Products.Where(p=>specification.ISSatisfiedBy(p));
+            return Context.Products.Where(specification.Expression);
         }
 
         public void Update(Product product)

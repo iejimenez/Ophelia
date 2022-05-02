@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ophelia.UseCasesPorts
+namespace Ophelia.UseCasesPorts.Customer
 {
     public interface ICreateCustomerInputPort
     {

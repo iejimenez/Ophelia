@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ophelia.UseCasesPorts
+namespace Ophelia.UseCasesPorts.Products
 {
-    public interface IGetCustomerInputPort
+    public interface IGetProductInputPort
     {
         Task Handle();
     }

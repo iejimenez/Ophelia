@@ -3,7 +3,7 @@ using Ophelia.Entities.Interfaces;
 using Ophelia.Entities.POCOEntities;
 using Ophelia.Entities.Specifications;
 using Ophelia.UseCasesDTOs.Customer.GetCustomer;
-using Ophelia.UseCasesPorts;
+using Ophelia.UseCasesPorts.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

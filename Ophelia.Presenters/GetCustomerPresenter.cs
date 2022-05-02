@@ -1,5 +1,7 @@
-﻿using Ophelia.UseCasesDTOs.Customer.GetCustomer;
-using Ophelia.UseCasesPorts;
+﻿
+using Ophelia.UseCasesDTOs.Customer.GetCustomer;
+using Ophelia.UseCasesDTOs.Product;
+using Ophelia.UseCasesPorts.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
